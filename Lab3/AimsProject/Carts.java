@@ -3,6 +3,7 @@ public class Carts {
     private DigitalVideoDisc itemsOrdered[] = new DigitalVideoDisc[MAX_NUMBERS_ORDERED];
     private int qtyOrdered = 0;
 
+    // Adds a digital video disc.
     public void addDigitalVideoDisc(DigitalVideoDisc disc){
         if (this.qtyOrdered == MAX_NUMBERS_ORDERED){
             System.out.println("This order is almost full!");
@@ -13,6 +14,7 @@ public class Carts {
         }
     }
 
+    // Removes a digital video disc.
     public void removeDigitalVideoDisc(DigitalVideoDisc disc){
         int count = 0, index = 0;
         if(this.qtyOrdered == 0){
@@ -36,6 +38,16 @@ public class Carts {
                 System.out.println("The disc " + disc.getTitle() + " has been deleted.");
             }
             
+        }
+    }
+
+   public void addDigitalVideoDisc(DigitalVideoDisc[] discList){
+        if(this.qtyOrdered == MAX_NUMBERS_ORDERED || this.qtyOrdered + discList.length > MAX_NUMBERS_ORDERED){
+            System.out.println("The order is full.");
+        } else{
+            for(int i = 0; i< discList.length; i++){
+                this.addDigitalVideoDisc(discList[i]);
+            }
         }
     }
 
