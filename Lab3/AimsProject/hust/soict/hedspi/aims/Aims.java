@@ -1,3 +1,10 @@
+package hust.soict.hedspi.aims;
+
+
+
+import hust.soict.hedspi.aims.cart.Carts;
+import hust.soict.hedspi.aims.disc.DigitalVideoDisc;
+
 public class Aims {
     public static void main(String[] args) {
         // TODO Auto-generated method stub
