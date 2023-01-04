@@ -1,23 +1,29 @@
-package hust.soict.hedspi.aims.store;
+package hust.soict.hedspi.aims.cart;
 
+
+import java.util.ArrayList;
+import java.util.Iterator;
+//import java.util.List;
+
+//import hust.soict.hedspi.aims.media.Disc;
 import hust.soict.hedspi.aims.media.Media;
-import java.util.ArrayList;;
+//import hust.soict.hedspi.aims.disc.DigitalVideoDisc;
 
-public class Store {
+public class Carts {
     public static final int MAX_NUMBERS_ORDERED = 20;
     public static final int MAX_LIMITED_ORDERED = 5;
     public static final int nbOrder = 0;
     public ArrayList<Media> itemsOrdered = new ArrayList<Media>();
-    public ArrayList<Media> itemsInStore = new ArrayList<Media>();
     private int qtyOrdered = 0;
     private static int nbOrders = 0;
 
-    public Store() {
-        if (Store.nbOrders == MAX_NUMBERS_ORDERED) {
+    public Carts() {
+        if (Carts.nbOrders == MAX_NUMBERS_ORDERED) {
             System.out.println("Max of orders");
         } else {
             this.qtyOrdered = 0;
-            Store.nbOrders++;
+            nbOrders++;
+
         }
     }
 
@@ -40,6 +46,7 @@ public class Store {
                     media.getCategory(), media.getCost());
             i++;
         }
+        System.out.println("Total cost: " + this.totalCost() + "$");
         System.out.println("*******************************************************");
     }
 
@@ -60,36 +67,6 @@ public class Store {
                 this.addMedia(mediaList[i]);
             }
         }
-    }
-
-    public void search(String id){
-        for (Media media : itemsOrdered) {
-            if (media.getId().equalsIgnoreCase(id)) {
-                System.out.println("Media with ID: " + id + " is founded!");
-                System.out.println(media.toString());
-                break;
-            }
-        }
-    }
-
-    public Media searchMediaByID(String id)
-    {
-        for (int i = 0; i < qtyOrdered; i++){
-            if (itemsOrdered.get(i).getId().contains(id)){
-                return itemsOrdered.get(i);
-            }
-        }
-        return null;
-    }
-
-    public Media searchMedia(String title)
-    {
-        for (int i = 0; i < qtyOrdered; i++){
-            if (itemsOrdered.get(i).getTitle().contains(title)){
-                return itemsOrdered.get(i);
-            }
-        }
-        return null;
     }
 
     public void addMedia(Media media1, Media media2) {
@@ -121,14 +98,16 @@ public class Store {
         }
     }
 
-    public ArrayList<Media> getItemsInStore() {
-        return itemsInStore;
+    // Sum of costs
+    public float totalCost() {
+        float total = 0.0f;
+        Media mediaItem;
+        Iterator iter = itemsOrdered.iterator();
+        while (iter.hasNext()) {
+            mediaItem = (Media) (iter.next());
+            total += mediaItem.getCost();
+        }
+        return total;
     }
-
-    public void setItemsInStore(ArrayList<Media> itemsInStore) {
-        this.itemsInStore = itemsInStore;
-    }
-
-    
 
 }
